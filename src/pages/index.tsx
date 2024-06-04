@@ -1,3 +1,4 @@
+import Botao from "@/components/Botao";
 import Layout from "@/components/Layout";
 import Tabela from "@/components/Tabela";
 import Produto from "@/core/Produto";
@@ -12,11 +13,11 @@ export default function Home() {
   ]
 
   function produtoSelecionado(produto: Produto) {
-console.log(`Selecionando : ${produto.nome}`)
+    console.log(`Selecionando : ${produto.nome}`)
   }
 
   function produtoExcluido(produto: Produto) {
-console.log(`Excluir ${produto.nome}`)
+    console.log(`Excluir ${produto.nome}`)
   }
 
   return (
@@ -25,9 +26,12 @@ console.log(`Excluir ${produto.nome}`)
       bg-gradient-to-r from-green-500 via-yellow-600 to-blue-500
     `}>
       <Layout titulo="Cadastro de Produtos">
+        <div className="flex justify-end">
+          <Botao cor="green" className="mb-2">Novo Produto</Botao>
+        </div>
         <Tabela produtos={produtos}
           produtoSelecionado={produtoSelecionado}
-          produtoExcluido={produtoExcluido}></Tabela>
+          produtoExcluido={produtoExcluido} />
       </Layout>
     </div>
 
