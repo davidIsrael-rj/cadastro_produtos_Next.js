@@ -1,4 +1,5 @@
 import Botao from "@/components/Botao";
+import Formulario from "@/components/Formulario";
 import Layout from "@/components/Layout";
 import Tabela from "@/components/Tabela";
 import Produto from "@/core/Produto";
@@ -29,9 +30,10 @@ export default function Home() {
         <div className="flex justify-end">
           <Botao cor="green" className="mb-2">Novo Produto</Botao>
         </div>
-        <Tabela produtos={produtos}
+        {/* <Tabela produtos={produtos}
           produtoSelecionado={produtoSelecionado}
-          produtoExcluido={produtoExcluido} />
+          produtoExcluido={produtoExcluido} /> */}
+          <Formulario produto={produtos[1]}/>
       </Layout>
     </div>
 
