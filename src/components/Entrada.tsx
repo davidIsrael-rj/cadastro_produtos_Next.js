@@ -3,10 +3,11 @@ interface EntradaProps {
     texto: string
     valor: any
     somenteLeitura?: boolean
+    classNam?: string
 }
 export default function Entrada(props: EntradaProps) {
     return (
-        <div className={`flex flex-col `}>
+        <div className={`flex flex-col m-1 ${props.classNam}`}>
             <label className="mb-4" >{props.texto}</label>
             <input
                 type={props.tipo ?? 'text'}

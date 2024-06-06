@@ -3,7 +3,7 @@ import Entrada from "./Entrada";
 import { useState } from "react";
 
 interface FormularioProps {
- produto: Produto
+    produto: Produto
 }
 export default function Formulario(props: FormularioProps) {
     const id = props.produto?.id
@@ -13,24 +13,24 @@ export default function Formulario(props: FormularioProps) {
     const [precCusto, setPrecCusto] = useState(props.produto?.preco_custo ?? '')
     const [alicota, setAlicota] = useState(props.produto?.alicota ?? '')
     const [margem, setMargem] = useState(props.produto?.margem ?? '')
-    
+
     return (
         <div>
-            <div className="flex justify-evenly ">
+            <div className="flex justify-between items-center ">
 
-            {id ? (
-                <Entrada texto="Código" valor={id}/>
-            ):false}
-            <Entrada texto="Código Barra" valor={codBarra}/>
+                {id ? (
+                    <Entrada texto="Código" valor={id} somenteLeitura />
+                ) : false}
+                <Entrada texto="Código Barra" valor={codBarra} classNam="flex-1" />
             </div>
-            <Entrada texto="Nome" valor={nome}/>
+            <Entrada texto="Nome" valor={nome} />
 
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center">
 
-            <Entrada texto="Preço Venda" valor={precVenda}/>
-            <Entrada texto="Preço Custo" valor={precCusto}/>
-            <Entrada texto="Margem de Lucro" valor={margem}/>
-            <Entrada texto="Alicota" valor={alicota}/>
+                <Entrada texto="Preço Venda" valor={precVenda} classNam="flex-1" />
+                <Entrada texto="Preço Custo" valor={precCusto} classNam="flex-1" />
+                <Entrada texto="Margem de Lucro" valor={margem} classNam="flex-1" />
+                <Entrada texto="Alicota" valor={alicota} classNam="flex-1" />
             </div>
         </div>
     )
