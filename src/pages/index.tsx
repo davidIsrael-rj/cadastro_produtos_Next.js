@@ -33,7 +33,7 @@ export default function Home() {
         {/* <Tabela produtos={produtos}
           produtoSelecionado={produtoSelecionado}
           produtoExcluido={produtoExcluido} /> */}
-          <Formulario produto={produtos[1]}/>
+          <Formulario produto={null}/>
       </Layout>
     </div>
 
