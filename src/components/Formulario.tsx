@@ -1,6 +1,6 @@
 import Produto from "@/core/Produto";
 import Entrada from "./Entrada";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { mascaraDados, precoSugerido } from "@/core/funcoes";
 import Botao from "./Botao";
 
@@ -15,7 +15,7 @@ export default function Formulario(props: FormularioProps) {
     const [precCusto, setPrecCusto] = useState(props.produto?.preco_custo ?? 0)
     const [alicota, setAlicota] = useState(props.produto?.alicota ?? '18')
     const [margem, setMargem] = useState(props.produto?.margem ?? 40)
-    const [precSugerido, setPrecSugerido] = useState(precoSugerido(precVenda, precCusto, margem))
+    const [precSugerido, setPrecSugerido] = useState()
 
     function precoSugerido(precVenda, preCusto, margem) {
         const precSug = (((preCusto * margem) / 100) + preCusto)
@@ -23,6 +23,11 @@ export default function Formulario(props: FormularioProps) {
         return precSug
 
     }
+
+    useEffect(()=>{
+        setPrecSugerido(precoSugerido(precVenda, precCusto, margem))
+    },[precCusto, precVenda, margem])
+
 
     function corPS(pV, pS) {
 
