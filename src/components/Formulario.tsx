@@ -20,7 +20,13 @@ export default function Formulario(props: FormularioProps) {
     
     useEffect(() => {
         const calcularPrecoSugerido = (preCusto, margem) => {
-          return (((preCusto * margem) / 100) + preCusto);
+            const numbPC = parseFloat(preCusto)
+            const numbM = parseFloat(margem)
+            console.log(typeof(numbPC), typeof(numbM))
+
+            const valor=(((numbPC * numbM) / 100) + numbPC);
+            console.log(valor)
+            return valor.toFixed(2)
         };
     
         const resultado = calcularPrecoSugerido(precCusto, margem);
