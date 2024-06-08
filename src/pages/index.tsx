@@ -7,7 +7,7 @@ import Produto from "@/core/Produto";
 export default function Home() {
   const produtos = [
     new Produto("123456", "Caneta", 1.19, 0.90, 40, "18", "1"),
-    new Produto("45", "Pente", 2.96, 1.40, 40, "18", "2"),
+    new Produto("45", "Pente", 1.90, 1.40, 40, "18", "2"),
     new Produto("70", "Toalha", 11.50, 5.90, 40, "18", "3"),
     new Produto("55", "Panela", 55.49, 20.00, 40, "18", "4"),
     new Produto("65", "Camiseta", 25.90, 19.90, 40, "18", "5"),
@@ -33,7 +33,7 @@ export default function Home() {
         {/* <Tabela produtos={produtos}
           produtoSelecionado={produtoSelecionado}
           produtoExcluido={produtoExcluido} /> */}
-          <Formulario produto={null}/>
+          <Formulario produto={produtos[1]}/>
       </Layout>
     </div>
 

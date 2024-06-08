@@ -15,6 +15,25 @@ export default function Formulario(props: FormularioProps) {
     const [precCusto, setPrecCusto] = useState(props.produto?.preco_custo ?? 0)
     const [alicota, setAlicota] = useState(props.produto?.alicota ?? '18')
     const [margem, setMargem] = useState(props.produto?.margem ?? 40)
+    const [precSugerido, setPrecSugerido] = useState(precoSugerido(precVenda, precCusto, margem))
+
+    function precoSugerido(precVenda, preCusto, margem) {
+        const precSug = (((preCusto * margem) / 100) + preCusto)
+        // const resultado = `R$ ${(precSug.toFixed(2)).replace('.', ',')}`
+        return precSug
+
+    }
+
+    function corPS(pV, pS) {
+
+        if (pV > pS) {
+            return "text-green-600"
+        } else if (pV === pS) {
+            return "text-blue-600"
+        } else {
+            return "text-red-600"
+        }
+    }
 
     return (
         <div>
@@ -31,6 +50,7 @@ export default function Formulario(props: FormularioProps) {
                 <Entrada texto="Preço Venda" valor={precVenda} valorMudou={setPreVenda} classNam="flex-1 w-2" />
                 <Entrada texto="Preço Custo" valor={precCusto} valorMudou={setPrecCusto} classNam="flex-1 w-2" />
                 <Entrada texto="Margem de Lucro" valor={margem} valorMudou={setMargem} classNam="flex-1 w-2" />
+                <Entrada texto="Preço Sugerido" valor={precSugerido} valorMudou={setPrecSugerido} classNam={`flex-1 w-2 ${corPS(precVenda, precSugerido)}`} />
                 <Entrada texto="Alicota" valor={alicota} valorMudou={setAlicota} classNam={`flex-1 w-2 `} />
             </div>
             <div className="flex justify-end mt-3">
