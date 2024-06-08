@@ -17,28 +17,30 @@ export default function Formulario(props: FormularioProps) {
     const [margem, setMargem] = useState(props.produto?.margem ?? 40)
     const [precSugerido, setPrecSugerido] = useState(0)
 
-    
+
     useEffect(() => {
         const calcularPrecoSugerido = (preCusto, margem) => {
             const numbPC = parseFloat(preCusto)
             const numbM = parseFloat(margem)
-            console.log(typeof(numbPC), typeof(numbM))
+            // console.log(typeof (numbPC), typeof (numbM))
 
-            const valor=(((numbPC * numbM) / 100) + numbPC);
-            console.log(valor)
+            const valor = (((numbPC * numbM) / 100) + numbPC);
+
             return valor.toFixed(2)
         };
-    
-        const resultado = calcularPrecoSugerido(precCusto, margem);
+
+        const resultado = +calcularPrecoSugerido(precCusto, margem);
         setPrecSugerido(resultado);
-      }, [precCusto, margem]);
+    }, [precCusto, margem]);
 
 
     function corPS(pV, pS) {
+        const precV = parseFloat(pV)
+        const precS = parseFloat(pS)
 
-        if (pV > pS) {
+        if (precV > precS) {
             return "text-green-600"
-        } else if (pV === pS) {
+        } else if (precV === precS) {
             return "text-blue-600"
         } else {
             return "text-red-600"
@@ -57,10 +59,10 @@ export default function Formulario(props: FormularioProps) {
             <Entrada texto="Nome" valor={nome} valorMudou={setNome} />
 
             <div className="flex justify-between items-center">
-                <Entrada texto="Preço Venda" valor={precVenda} valorMudou={setPreVenda} classNam="flex-1 w-2" />
-                <Entrada texto="Preço Custo" valor={precCusto} valorMudou={setPrecCusto} classNam="flex-1 w-2" />
-                <Entrada texto="Margem de Lucro" valor={margem} valorMudou={setMargem} classNam="flex-1 w-2" />
-                <Entrada texto="Preço Sugerido" valor={precSugerido} classNam={`flex-1 w-2 ${corPS(precVenda, precSugerido)}`} />
+                <Entrada texto="Preço Venda" tipo="number" valor={precVenda} valorMudou={setPreVenda} classNam="flex-1 w-2" />
+                <Entrada texto="Preço Custo" tipo="number" valor={precCusto} valorMudou={setPrecCusto} classNam="flex-1 w-2" />
+                <Entrada texto="Margem de Lucro" tipo="number" valor={margem} valorMudou={setMargem} classNam="flex-1 w-2" />
+                <Entrada texto="Preço Sugerido" tipo="number" valor={precSugerido} classNam={`flex-1 w-2 ${corPS(precVenda, precSugerido)}`} />
                 <Entrada texto="Alicota" valor={alicota} valorMudou={setAlicota} classNam={`flex-1 w-2 `} />
             </div>
             <div className="flex justify-end mt-3">
