@@ -14,16 +14,25 @@ export default function Home() {
     new Produto("65", "Camiseta", 25.90, 19.90, 40, "18", "5"),
   ]
 
+  const [produto, setProduto] = useState<Produto>(Produto.vazio())
+
   function produtoSelecionado(produto: Produto) {
-    console.log(`Selecionando : ${produto.nome}`)
+    // console.log(`Selecionando : ${produto.nome}`)
+    setProduto(produto)
+    setVisivel('form')
   }
 
   function produtoExcluido(produto: Produto) {
     console.log(`Excluir ${produto.nome}`)
   }
+  function novoProduto(){
+    setProduto(Produto.vazio())
+    setVisivel('form')
+  }
 
-  function salvarProduto(produto: Produto){
+  function salvarProduto(produto: Produto) {
     console.log(produto)
+    setVisivel('tabela')
   }
   const [visivel, setVisivel] = useState<'tabela' | 'form'>('tabela')
 
@@ -37,7 +46,7 @@ export default function Home() {
           <>
             <div className="flex justify-end">
               <Botao
-              onClick={()=> setVisivel('form')}
+                onClick={novoProduto}
                 cor="green"
                 className="mb-2">
                 Novo Produto
@@ -48,10 +57,10 @@ export default function Home() {
               produtoExcluido={produtoExcluido} />
           </>
         ) : (
-          <Formulario 
-          produto={produtos[1]} 
-          produtoMudou={salvarProduto}
-          cancelado={()=> setVisivel('tabela')}
+          <Formulario
+            produto={produto}
+            produtoMudou={salvarProduto}
+            cancelado={() => setVisivel('tabela')}
           />
         )}
       </Layout>
