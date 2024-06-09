@@ -6,6 +6,8 @@ import Botao from "./Botao";
 
 interface FormularioProps {
     produto: Produto
+    produtoMudou?:(produto: Produto)=> void
+    cancelado?: ()=> void
 }
 export default function Formulario(props: FormularioProps) {
     const id = props.produto?.id
@@ -65,12 +67,14 @@ export default function Formulario(props: FormularioProps) {
                 <Entrada texto="Preço Sugerido" tipo="number" valor={precSugerido} classNam={`flex-1 w-2 ${corPS(precVenda, precSugerido)}`} />
                 <Entrada texto="Alicota" valor={alicota} valorMudou={setAlicota} classNam={`flex-1 w-2 `} />
             </div>
+            
             <div className="flex justify-end mt-3">
-                <Botao cor="blue" className="mr-2">
+                <Botao cor="blue" className="mr-2"
+                    onClick={() => props.produtoMudou?.(new Produto(codBarra, nome,precVenda, precCusto, margem, alicota, id))}>
                     {id ? 'Alterar' : 'Salvar'}
                 </Botao>
 
-                <Botao>
+                <Botao onClick={props.cancelado}>
                     Cancelar
                 </Botao>
 

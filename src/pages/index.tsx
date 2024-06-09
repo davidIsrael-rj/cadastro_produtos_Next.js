@@ -3,6 +3,7 @@ import Formulario from "@/components/Formulario";
 import Layout from "@/components/Layout";
 import Tabela from "@/components/Tabela";
 import Produto from "@/core/Produto";
+import { useState } from "react";
 
 export default function Home() {
   const produtos = [
@@ -21,19 +22,38 @@ export default function Home() {
     console.log(`Excluir ${produto.nome}`)
   }
 
+  function salvarProduto(produto: Produto){
+    console.log(produto)
+  }
+  const [visivel, setVisivel] = useState<'tabela' | 'form'>('tabela')
+
   return (
     <div className={`
       flex h-screen justify-center items-center
       bg-gradient-to-r from-green-500 via-yellow-600 to-blue-500
     `}>
       <Layout titulo="Cadastro de Produtos">
-        <div className="flex justify-end">
-          <Botao cor="green" className="mb-2">Novo Produto</Botao>
-        </div>
-        {/* <Tabela produtos={produtos}
-          produtoSelecionado={produtoSelecionado}
-          produtoExcluido={produtoExcluido} /> */}
-          <Formulario produto={produtos[1]}/>
+        {visivel === 'tabela' ? (
+          <>
+            <div className="flex justify-end">
+              <Botao
+              onClick={()=> setVisivel('form')}
+                cor="green"
+                className="mb-2">
+                Novo Produto
+              </Botao>
+            </div>
+            <Tabela produtos={produtos}
+              produtoSelecionado={produtoSelecionado}
+              produtoExcluido={produtoExcluido} />
+          </>
+        ) : (
+          <Formulario 
+          produto={produtos[1]} 
+          produtoMudou={salvarProduto}
+          cancelado={()=> setVisivel('tabela')}
+          />
+        )}
       </Layout>
     </div>
 
