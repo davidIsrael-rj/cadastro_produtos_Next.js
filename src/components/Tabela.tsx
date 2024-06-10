@@ -54,12 +54,17 @@ export default function Tabela(props: TabelaProps) {
         )
     }
 
-    function mascaraDados(dados) {
+    function mascaraDados(dadosN) {
+        const dados = parseFloat(dadosN)        
         const resultado = (`R$ ${((dados).toFixed(2)).replace('.', ',')}`)
         return resultado
     }
 
-    function precoSugerido(precVenda, preCusto, margem) {
+    function precoSugerido(precVendaN, preCustoN, margemN) {
+        const precVenda = parseFloat(precVendaN)
+        const preCusto = parseFloat(preCustoN)
+        const margem = parseFloat(margemN)
+
         const precSug = (((preCusto * margem) / 100) + preCusto)
         const resultado = `R$ ${(precSug.toFixed(2)).replace('.', ',')}`
         if (precVenda > precSug) {

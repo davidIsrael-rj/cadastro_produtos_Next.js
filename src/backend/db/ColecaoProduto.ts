@@ -44,9 +44,6 @@ export default class ColecaoProduto implements ProdutoRepositorio {
     }
 
     #colecao() {
-        return firebase
-            .firestore()
-            .collection('produtos')
-            .withConverter(this.#conversor)
+        return firebase.firestore().collection('produtos').withConverter(this.#conversor)
     }
 }
